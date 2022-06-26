@@ -16,6 +16,9 @@ import java.util.List;
 @Table(name = "board")
 @Entity
 public class BoardEntity {
+  /**
+   * 게시판 id
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
