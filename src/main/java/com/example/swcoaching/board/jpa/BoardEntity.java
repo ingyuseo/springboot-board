@@ -1,5 +1,6 @@
 package com.example.swcoaching.board.jpa;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.Column;

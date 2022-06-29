@@ -16,13 +16,21 @@ public class Post {
 
   private final String contents;
 
-  public Post(Long id, String title, String contents) {
+  private final String username;
+
+  private final Long hits;
+
+
+  public Post(Long id, String title, String contents, String username) {
     this.id = id;
     this.title = title;
     this.contents = contents;
+    this.username = username;
+    this.hits = 0L;
   }
 
   public static Post of(PostEntity postEntity) {
-    return new Post(postEntity.getId(), postEntity.getTitle(), postEntity.getContents());
+    return new Post(postEntity.getId(), postEntity.getTitle(), postEntity.getContents(), postEntity.getUsername());
   }
+
 }

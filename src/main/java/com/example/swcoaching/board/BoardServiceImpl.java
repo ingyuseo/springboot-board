@@ -2,6 +2,7 @@ package com.example.swcoaching.board;
 
 import com.example.swcoaching.board.jpa.BoardEntity;
 import com.example.swcoaching.board.jpa.BoardRepository;
+import com.example.swcoaching.board.jpa.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,4 +24,10 @@ public class BoardServiceImpl implements BoardService {
             .map(Board::of)
             .orElseThrow(() -> new BoardNotFoundException(id));
   }
-}
+ /*
+  @Transactional
+
+  public Long saveBoard(Board board){
+    return boardRepository.save(board.toEntity()).getId();
+    */
+  }

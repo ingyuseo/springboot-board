@@ -28,9 +28,21 @@ public class Board {
   public static Board of(BoardEntity boardEntity) {
     List<Post> posts = boardEntity.getPosts()
             .stream().map(Post::of).collect(Collectors.toList());
+
     return new Board(boardEntity.getId(),
             boardEntity.getTitle(),
             boardEntity.getRemark(),
             posts);
   }
-}
+
+  /*public BoardEntity toEntity(){
+    BoardEntity build = BoardEntity.builder()
+            .id(id)
+            .title(title)
+            .remark(remark)
+            .build();
+
+    return build;
+  }*/
+
+  }
