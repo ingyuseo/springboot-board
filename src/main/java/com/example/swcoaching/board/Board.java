@@ -4,6 +4,7 @@ import com.example.swcoaching.board.jpa.BoardEntity;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,14 +36,12 @@ public class Board {
             posts);
   }
 
-  /*public BoardEntity toEntity(){
-    BoardEntity build = BoardEntity.builder()
-            .id(id)
+  public BoardEntity toEntity(){
+    return BoardEntity.builder()
             .title(title)
             .remark(remark)
+            .posts(Collections.emptyList())
             .build();
-
-    return build;
-  }*/
+  }
 
   }

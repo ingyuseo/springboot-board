@@ -13,9 +13,3 @@ server:
   servlet:
     encoding:
       charset: UTF-8
-
-spring:
-  thymeleaf:
-    prefix: classpath:templates/
-    suffix: .html
-    cache: false

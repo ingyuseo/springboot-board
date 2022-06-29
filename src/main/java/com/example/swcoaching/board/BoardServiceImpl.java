@@ -24,10 +24,9 @@ public class BoardServiceImpl implements BoardService {
             .map(Board::of)
             .orElseThrow(() -> new BoardNotFoundException(id));
   }
- /*
-  @Transactional
 
-  public Long saveBoard(Board board){
+  @Transactional
+  public Long saveBoard(Board board) {
     return boardRepository.save(board.toEntity()).getId();
-    */
   }
+}
