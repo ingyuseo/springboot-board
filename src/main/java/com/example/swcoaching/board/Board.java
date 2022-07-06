@@ -40,7 +40,7 @@ public class Board {
     return BoardEntity.builder()
             .title(title)
             .remark(remark)
-            .posts(Collections.emptyList())
+            .posts(Collections.emptyList()) //???????
             .build();
   }
 

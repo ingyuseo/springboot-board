@@ -6,6 +6,8 @@ import com.example.swcoaching.board.jpa.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +25,17 @@ public class BoardServiceImpl implements BoardService {
     return boardRepository.findById(id)
             .map(Board::of)
             .orElseThrow(() -> new BoardNotFoundException(id));
+  }
+  @Transactional
+  public List<Board> findAllBoards(){
+    List<Board> Boards = new ArrayList<>();
+
+    for(BoardEntity e : boardRepository.findAll())
+    {
+      Boards.add(Board.of(e));
+    }
+
+    return Boards;
   }
 
   @Transactional

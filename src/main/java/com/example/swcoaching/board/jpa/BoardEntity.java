@@ -26,7 +26,7 @@ public class BoardEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
+//primitive 는 null일 수 없다. 래퍼클래스
   /**
    * 게시판 제목
    */

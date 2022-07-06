@@ -1,5 +1,6 @@
 package com.example.swcoaching.board.jpa;
 
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 게시물
@@ -68,5 +70,12 @@ public class PostEntity {
   @JoinColumn(name = "boardId")
   private BoardEntity board;
 
+  @Builder
+  public PostEntity(String title, String contents, String username, BoardEntity board) {
+    this.title = title;
+    this.contents = contents;
+    this.username = username;
+    this.board=board;
+  }
 
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>post</title>
+</head>
+<body>
+<div class="container">
+  <h2>게시글 쓰기</h2>
+
+  <form id="frm" name="frm" method="post" action="/board/insert-board">
+    <table class="board_detail">
+      <tr>
+        <td>제목</td>
+        <td><input type="text" id="title" name="title"></td>
+
+      </tr>
+      <tr>
+        <td colspan="2"> 내용
+          <textarea id="remark" name="remark"></textarea>
+
+        </td>
+      </tr>
+    </table>
+    <input type="hidden" name="_csrf" value="{{#_csrf}}token{{/_csrf}}" />
+    <input type="submit" id="submit" value="저장" class="btn">
+  </form>
+</div>
+</body>
+</html>
