@@ -35,9 +35,6 @@ public class PostServiceImpl implements PostService {
         return Posts;
     }
 
-    @Transactional
-    public Long savePost(Post post, Board board) {
-        return postRepository.save(post.toEntity(board.id)).getId();
-    }
+
 
 }

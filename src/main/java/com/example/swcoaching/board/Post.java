@@ -36,12 +36,12 @@ public class Post {
     return new Post(postEntity.getId(), postEntity.getTitle(), postEntity.getContents(), postEntity.getUsername());
   }
 
-  public PostEntity toEntity(long board_id){
+  public PostEntity toEntity(BoardEntity boardEntity){
     return PostEntity.builder()
             .title(title)
             .contents(contents)
             .username(username)
-            .board_id(board_id)
+            .board(boardEntity)
             .build();
   }
 

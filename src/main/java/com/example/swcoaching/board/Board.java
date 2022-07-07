@@ -1,6 +1,7 @@
 package com.example.swcoaching.board;
 
 import com.example.swcoaching.board.jpa.BoardEntity;
+import com.example.swcoaching.board.jpa.PostEntity;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -36,12 +37,13 @@ public class Board {
             posts);
   }
 
-  public BoardEntity toEntity(){
+  public BoardEntity toEntity(List<PostEntity> postEntity){
     return BoardEntity.builder()
             .title(title)
             .remark(remark)
-            .posts(Collections.emptyList()) //???????
+            .posts(postEntity) //???????
             .build();
   }
+
 
   }

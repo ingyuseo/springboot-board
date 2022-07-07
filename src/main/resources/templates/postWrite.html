@@ -8,7 +8,8 @@
 <div class="container">
   <h2>게시글 쓰기</h2>
 
-  <form id="frm" name="frm" method="post" action="/board/insert-board">
+  <form id="frm" name="frm" method="post" action="/board/insert">
+    <input type="hidden" name="board_id"  th:value = "${board_id}" />
     <table class="board_detail">
       <tr>
         <td>제목</td>
@@ -17,7 +18,7 @@
       </tr>
       <tr>
         <td colspan="2"> 내용
-          <textarea id="remark" name="remark"></textarea>
+          <textarea id="contents" name="contents"></textarea>
 
         </td>
       </tr>

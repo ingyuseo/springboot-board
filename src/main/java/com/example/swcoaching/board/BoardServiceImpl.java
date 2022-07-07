@@ -2,11 +2,13 @@ package com.example.swcoaching.board;
 
 import com.example.swcoaching.board.jpa.BoardEntity;
 import com.example.swcoaching.board.jpa.BoardRepository;
+import com.example.swcoaching.board.jpa.PostEntity;
 import com.example.swcoaching.board.jpa.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,15 @@ public class BoardServiceImpl implements BoardService {
 
   @Transactional
   public Long saveBoard(Board board) {
-    return boardRepository.save(board.toEntity()).getId();
+    List<PostEntity> list = Collections.emptyList();
+    return boardRepository.save(board.toEntity(list)).getId();
+  }
+
+  @Transactional
+  public Long savePost(Post post, long id) {
+    BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(NullPointerException::new);
+    PostEntity postEntity = post.toEntity(boardEntity);
+    boardEntity.posts.add(postEntity);
+    return boardRepository.save(boardEntity).getId();
   }
 }

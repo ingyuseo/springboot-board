@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2><p th:text="${Board.title}"/> </h2>
-<a th:href="@{/board/list/}">
+<a th:href="@{/board/postWrite/{id}(id = ${Board.id})}">
   <p>글쓰기</p>
 </a>
 <table border="1">

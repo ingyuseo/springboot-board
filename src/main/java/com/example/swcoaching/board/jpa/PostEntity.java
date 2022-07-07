@@ -2,6 +2,7 @@ package com.example.swcoaching.board.jpa;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,6 +15,7 @@ import java.util.List;
  * 게시물
  */
 @Getter
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "post")
 @Entity
@@ -66,8 +68,8 @@ public class PostEntity {
    */
 
 
-  @ManyToOne
-  @JoinColumn(name = "boardId")
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "board_Id")
   private BoardEntity board;
 
   @Builder
@@ -75,7 +77,7 @@ public class PostEntity {
     this.title = title;
     this.contents = contents;
     this.username = username;
-    this.board=board;
+    this.board =board;
   }
 
 }

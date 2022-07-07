@@ -7,4 +7,6 @@ public interface BoardService {
 
   List<Board> findAllBoards();
   Long saveBoard(Board board);
+
+  Long savePost(Post post, long id);
 }

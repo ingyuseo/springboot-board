@@ -29,9 +29,12 @@ public class ViewController {
         return "boardWrite";
     }
 
-    @GetMapping("/board/postWrite")
-    public String openPostWrite() throws Exception{
-        return "postWrite";
+    @GetMapping("/board/postWrite/{id}")
+    public ModelAndView openPostWrite(@PathVariable long id) throws Exception{
+        ModelAndView mav = new ModelAndView("postWrite");
+        mav.addObject("board_id", id);
+
+        return mav;
     }
 
     @GetMapping("/board/list")
@@ -50,10 +53,10 @@ public class ViewController {
         return "test";
     }
 
-    @PostMapping("/board/{id}/insert")
-    public String insertPost(@PathVariable Long id, @ModelAttribute Post post) throws Exception{
-        Board board = boardService.findById(id);
-        postService.savePost(post, board);
+    @PostMapping("/board/insert")
+    public String insertPost(@RequestParam("board_id") Long id, @ModelAttribute Post post) throws Exception{
+        //Board board = boardService.findById(id);
+        boardService.savePost(post, id);
         return "test";
     }
 
