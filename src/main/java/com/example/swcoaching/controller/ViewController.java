@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -54,12 +55,17 @@ public class ViewController {
     }
 
     @PostMapping("/board/insert")
-    public String insertPost(@RequestParam("board_id") Long id, @ModelAttribute Post post) throws Exception{
-        //Board board = boardService.findById(id);
-        boardService.savePost(post, id);
-        return "test";
+    public String insertPost(@RequestParam("board_id") Long id, @ModelAttribute Post post, RedirectAttributes re) throws Exception{
+        postService.savePost(post, id);
+        re.addAttribute("id", id);
+        return "redirect:/board/list/{id}";
     }
 
+    @DeleteMapping("/delete/")
+    public String deletePost(@ModelAttribute Post post) throws Exception{
+        postService.deletePost(post);
+        return "test";
+    }
 
 
     @GetMapping("/board/list/{id}")

@@ -6,5 +6,7 @@ public interface PostService {
         Post findById(long id);
         List<Post> PostInBoard(long id);
 
+        Long savePost(Post post, long id);
 
+        void deletePost(Post post);
 }

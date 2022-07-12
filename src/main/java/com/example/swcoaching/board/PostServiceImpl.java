@@ -1,5 +1,7 @@
 package com.example.swcoaching.board;
 
+import com.example.swcoaching.board.jpa.BoardEntity;
+import com.example.swcoaching.board.jpa.BoardRepository;
 import com.example.swcoaching.board.jpa.PostEntity;
 import com.example.swcoaching.board.jpa.PostRepository;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final BoardRepository boardRepository;
 
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, BoardRepository boardRepository) {
         this.postRepository = postRepository;
+        this.boardRepository = boardRepository;
     }
 
     @Override
@@ -35,6 +39,20 @@ public class PostServiceImpl implements PostService {
         return Posts;
     }
 
+    @Transactional
+    public Long savePost(Post post, long id) {
+        BoardEntity boardEntity = boardRepository.getReferenceById(id);//findbyId 말고 jparepository getone
+        PostEntity postEntity = post.toEntity(boardEntity);
+
+        postRepository.save(postEntity);
+        return boardRepository.save(boardEntity).getId();
+    }
+
+    @Transactional
+    public void deletePost(Post post) {
+     //   BoardEntity boardEntity = boardRepository.getReferenceById(id);//findbyId 말고 jparepository getone
+       postRepository.deleteById(post.getId());
+    }
 
 
 }

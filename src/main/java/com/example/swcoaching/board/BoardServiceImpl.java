@@ -46,11 +46,5 @@ public class BoardServiceImpl implements BoardService {
     return boardRepository.save(board.toEntity(list)).getId();
   }
 
-  @Transactional
-  public Long savePost(Post post, long id) {
-    BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(NullPointerException::new);
-    PostEntity postEntity = post.toEntity(boardEntity);
-    boardEntity.posts.add(postEntity);
-    return boardRepository.save(boardEntity).getId();
-  }
+
 }
