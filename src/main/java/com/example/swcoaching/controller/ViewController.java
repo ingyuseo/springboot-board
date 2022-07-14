@@ -7,14 +7,15 @@ import com.example.swcoaching.board.PostService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
-import static com.example.swcoaching.board.PostService.*;
 
 
 @AllArgsConstructor
@@ -24,6 +25,7 @@ public class ViewController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final BoardService boardService;
     private final PostService postService;
+
 
     @GetMapping("/board/BoardWrite")
     public String openBoardWrite() throws Exception{
@@ -48,10 +50,8 @@ public class ViewController {
 
     @PostMapping("/board/insert-board")
     public String insertBoard(@ModelAttribute Board board) throws Exception{
-        logger.info("called!");
-        logger.info("board : {} {} {} {}" , board.getId(),board.getTitle() ,board.getRemark() ,board.getPosts());
         boardService.saveBoard(board);
-        return "test";
+        return "pagingtest";
     }
 
     @PostMapping("/board/insert")
@@ -61,17 +61,9 @@ public class ViewController {
         return "redirect:/board/list/{id}";
     }
 
-    @DeleteMapping("/delete/")
-    public String deletePost(@ModelAttribute Post post) throws Exception{
-        postService.deletePost(post);
-        return "test";
-    }
-
-
     @GetMapping("/board/list/{id}")
     public ModelAndView postlist(@PathVariable Long id) throws Exception{
         ModelAndView mav = new ModelAndView("postlist");
-
         Board board = boardService.findById(id);
 
         List<Post> Posts = postService.PostInBoard(id);
@@ -79,5 +71,48 @@ public class ViewController {
         mav.addObject("Board",board);
         return mav;
     }
+
+    @GetMapping("/view/")
+    public ModelAndView viewPost(@RequestParam(value = "bid") Long bid, @RequestParam(value = "pid") Long pid) throws Exception{
+        ModelAndView mav = new ModelAndView("viewpost");
+        Post post = postService.findById(pid);
+        mav.addObject("Post", post);
+        mav.addObject("bid",bid);
+        return mav;
+    }
+
+    @GetMapping("/delete/")
+    public String deletePost(@RequestParam("bid") Long bid, @RequestParam("pid")  Long pid, RedirectAttributes re) throws Exception{
+        postService.deletePost(pid);
+        re.addAttribute("bid", bid);
+        return "redirect:/board/list/{bid}";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(@RequestParam("bid") Long id, @ModelAttribute Post post, RedirectAttributes re) throws Exception{
+        postService.updatePost(post);
+        re.addAttribute("bid", id);
+        re.addAttribute("pid", post.getId());
+        return "redirect:/view/";
+    }
+
+    @PostMapping("/updateWrite")
+    public ModelAndView updateForm(@RequestParam("bid") Long bid, @RequestParam("pid") Long pid) throws Exception{
+        ModelAndView mav = new ModelAndView("updateWrite");
+
+        Post post = postService.findById(pid);
+        mav.addObject("Post", post);
+        mav.addObject("bid", bid);
+        return mav;
+    }
+
+
+    @GetMapping("/")
+    public ModelAndView index(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        ModelAndView mav = new ModelAndView("test");
+        mav.addObject("posts", postService.pageList(pageable));
+        return mav;
+    }
+
 
 }

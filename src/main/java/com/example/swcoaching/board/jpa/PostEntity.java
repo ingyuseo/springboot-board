@@ -68,8 +68,8 @@ public class PostEntity {
    */
 
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "board_Id")
+  @ManyToOne()
+  @JoinColumn(name = "board_Id" )
   private BoardEntity board;
 
   @Builder
@@ -80,4 +80,9 @@ public class PostEntity {
     this.board =board;
   }
 
+  public void update(String title, String contents)
+  {
+    this.title = title;
+    this.contents = contents;
+  }
 }

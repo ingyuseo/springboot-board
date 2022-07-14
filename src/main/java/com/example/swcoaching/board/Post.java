@@ -2,6 +2,7 @@ package com.example.swcoaching.board;
 
 import com.example.swcoaching.board.jpa.BoardEntity;
 import com.example.swcoaching.board.jpa.PostEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 

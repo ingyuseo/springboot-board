@@ -6,8 +6,8 @@
     <link rel = "stylesheet" href="/resources/css/bootstrap.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-
 <body>
+
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand">SKKU Board</a>
@@ -18,24 +18,18 @@
     </div>
 </nav>
 
-<table class="table">
-    <thead class="table-light">
-    <tr>
-        <td>Id</td>
-        <td>이름</td>
-        <td>설명 </td>
-    </tr>
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">게시글 제목</label>
+    <form id="frm" name="frm" method="post" action="/update">
+        <input type="hidden" name="bid"  th:value = "${bid}" />
+        <input type="hidden" name="id"  th:value = "${Post.id}" />
+        <input type="title" class="form-control" id="exampleFormControlInput1" name="title" th:value="${Post.title}">
 
-    <tr th:each="b : ${boards}">
-        <td th:text="${b.id}"/>
-        <td>
-            <a th:href="@{/board/list/{id}(id=${b.id})}">
-               <p th:text="${b.title}"/>
-            </a>
-        </td>
-        <td th:text="${b.remark}"/>
-    </tr>
+        <label for="exampleFormControlInput2" class="form-label">게시글 내용</label>
+        <input type="title" class="form-control" id="exampleFormControlInput2" name="contents" th:value="${Post.contents}" style="height:400px;" />
+        <input type="submit" id="submit" value="저장" class="btn btn-outline-primary">
+    </form>
+</div>
 
-</table>
 </body>
 </html>

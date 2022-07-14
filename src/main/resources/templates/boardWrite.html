@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>board</title>
+    <title>게시판 목록</title>
+    <link rel = "stylesheet" href="/resources/css/bootstrap.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">SKKU Board</a>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">게시글 제목</label>
+    <input type="title" class="form-control" id="exampleFormControlInput1" placeholder="제목">
+</div>
+<div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">게시글 내용</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+</div>
+
+
 <div class="container">
     <h2>새로운 게시판 만들기</h2>
 

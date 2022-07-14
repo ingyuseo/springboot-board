@@ -4,6 +4,8 @@ import com.example.swcoaching.board.jpa.BoardEntity;
 import com.example.swcoaching.board.jpa.BoardRepository;
 import com.example.swcoaching.board.jpa.PostEntity;
 import com.example.swcoaching.board.jpa.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
+
 
     public PostServiceImpl(PostRepository postRepository, BoardRepository boardRepository) {
         this.postRepository = postRepository;
@@ -49,10 +52,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Transactional
-    public void deletePost(Post post) {
-     //   BoardEntity boardEntity = boardRepository.getReferenceById(id);//findbyId 말고 jparepository getone
-       postRepository.deleteById(post.getId());
+    public void deletePost(Long id) {
+      postRepository.deleteById(id);
     }
 
+    @Transactional
+    public void updatePost(Post post) {
+        PostEntity p = postRepository.getReferenceById(post.getId());
+        p.update(post.getTitle(), post.getContents());
+        postRepository.save(p);
+    }
+
+    @Transactional
+    public Page<PostEntity> pageList(Pageable pageable)
+    {
+        return postRepository.findAll(pageable);
+    }
 
 }
