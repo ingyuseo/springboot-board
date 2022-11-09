@@ -1,4 +1,4 @@
-## 개발 환경 만들기
+## Springboot 게시판 만들기 Project 
 
 ### 과제 1. IDE 설치
 #### 현재 사용하고있는 컴퓨터에 IntelliJ Community 버전 설치 하기 (IDE는 통일 하겠습니다.)
