@@ -17,4 +17,12 @@
 
 - 게시글 관련 transcation API 완성
 - Bootstrap으로 간단한 웹페이지 구성
+- docker 연결, github action 연결 로컬에서 배포
 - ..
+
+### 3. 사용 방법 (IntelliJ 기준)
+
+- 소스 내려받기
+- ./gradle.bat startDocker 실행.  (DB container 띄우기)
+- SKKU_community_application 실행.
+
