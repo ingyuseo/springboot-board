@@ -24,5 +24,5 @@
 
 - 소스 내려받기
 - ./gradle.bat startDocker 실행.  (DB container 띄우기)
-- SKKU_community_application 실행.
+- application 파일 실행. (서버실행)
 
